@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 Clasificación
+  div#resultado
+  table
+    tr
+      td(align="center")
+        b Posición
+      td(align="center")
+        b Empresa
+      td(align="center")
+        b Calificacion
+    each dato, i in datos
+      tr
+      td(align="center")
+          p= i+1
+        td(align="center")
+          p= dato.nombre
+        td(align="center")
+          p= dato.puntuacion
