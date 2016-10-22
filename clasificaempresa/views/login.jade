@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  div
+    form(action='/autenticar', method='post')
+      label(for='DNIalum')
+        input(type='numer', id='DNIalum', name='DNIalum', placeholder='DNI')
+      label(for='txtClave')
+        input(type='password', id='txtClave', name='txtClave')
+      button(type='submit') Identificar
