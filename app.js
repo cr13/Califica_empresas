@@ -96,7 +96,7 @@ app.post('/anadiralumno', function(req, res){
       console.log(error.message);
       res.send('Registro del alumno inválido o el usuario ya está registrado');
     }else{
-      console.log('Insertado');
+      console.log('Registrando alumno');
       session.DNIalum = DNIalumno;
       res.redirect('/');
     }
@@ -176,7 +176,7 @@ app.post('/registrarVoto', login, function(req, res){
   var param = req.body.borrarvoto;
   if(param=="borrar"){
     objBD.query('UPDATE `voto` SET Borrado=0 WHERE `voto`.`IDempresa` = '+ IDempresa +' AND `voto`.`DNIvotante` = '+ user , function( error, resultado, fila){
-      console.log('UPDATE `voto` SET Borrado=0 WHERE `voto`.`IDempresa` = '+ IDempresa +' AND `voto`.`DNIvotante` = '+ user);
+      //console.log('UPDATE `voto` SET Borrado=0 WHERE `voto`.`IDempresa` = '+ IDempresa +' AND `voto`.`DNIvotante` = '+ user);
       if(error){
         console.log(error.message);
         res.send('Error al borrar votación');
@@ -191,10 +191,18 @@ app.post('/registrarVoto', login, function(req, res){
   else{
       objBD.query('INSERT INTO `voto`(`IDempresa`, `puntuacion`, `DNIvotante`) VALUES ('+ IDempresa +',"'+ nota +'","'+ user +'")', function( error ){
         if(error){
-          console.log(error.message);
-          res.send('Puntuación inválida o ya realizaste esa puntuación');
+          objBD.query('UPDATE `voto` SET Borrado=1,puntuacion="'+ nota +'"  WHERE `voto`.`IDempresa` = '+ IDempresa +' AND `voto`.`DNIvotante` = '+ user , function( error, resultado, fila){
+            //console.log('UPDATE `voto` SET Borrado=0 WHERE `voto`.`IDempresa` = '+ IDempresa +' AND `voto`.`DNIvotante` = '+ user);
+            if(error){
+              console.log(error.message);
+              res.send('Error al borrar votación');
+            }else{
+              console.log('Insertado voto de nuevo');
+              res.redirect('/mostrarclasificacion');
+            }
+          });
         }else{
-          console.log('Insertado');
+          console.log('Insertado voto');
           res.redirect('/mostrarclasificacion');
         }
       });
