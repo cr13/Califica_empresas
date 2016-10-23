@@ -105,7 +105,7 @@ app.post('/anadiralumno', function(req, res){
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
-//Permite mostrar todas las empresas del sistema
+//Permite mostrar todas las empresas del sistema que un usuario dado no ha votado
 app.get('/mostrarEmpresas', login,  function(req, res){
   var objBD = BD();
   var DNIvotante = session.DNIalum;
@@ -115,7 +115,7 @@ app.get('/mostrarEmpresas', login,  function(req, res){
       res.render('vota', { empresas:resultado } );
 
       }else{
-        res.send('No hay empresas en el sistema');
+        res.send('Ya has votado a todas las empresas del sistema');
       }
     }else{
       console.log('Error');
@@ -210,20 +210,13 @@ app.post('/registrarVoto', login, function(req, res){
 });
 
 //-----------------------------------------------------------------------------------------------------------------------------------------
-//Permite mostrar todas las empresas, la puntuación y el alumno que realizó la puntuacion del sistema
+//Permite mostrar todas las empresas y sus respectivas puntuaciones
 app.get('/mostrarclasificacion',  function(req, res){
   var objBD = BD();
   objBD.query('SELECT * FROM ranking', function( error, resultado, fila){
-    if(!error){
-      if(resultado.length > 0){
-        res.render('ranking', {datos:resultado } );
-
-      }else{
-        res.send('No hay empresas en el sistema');
-      }
-    }else{
-      console.log('Error');
-    }
+    assert.ok(!error,"Error en la consulta del ranking");
+    assert.notEqual(resultado.length,0,"No exisite niguna puntuación en estos momentos");
+    res.render('ranking', {datos:resultado } );
   });
 });
 
