@@ -10,4 +10,4 @@ before_install:
   - mysql -u root < clasifica_empresa.sql
   - npm install
   - npm install -g mocha
-install: mocha test/test.js
+install: npm test
