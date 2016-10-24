@@ -1,5 +1,7 @@
 # Califica_empresas
 
+![status](https://travis-ci.org/cr13/Califica_empresas.svg?branch=master)
+
 Sitio Web con las siguientes funcionalidades:
 
 1º Permite registar usuarios y loguearse.

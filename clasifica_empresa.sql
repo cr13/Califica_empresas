@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-10-2016 a las 18:19:16
+-- Tiempo de generación: 24-10-2016 a las 02:37:17
 -- Versión del servidor: 10.1.16-MariaDB
 -- Versión de PHP: 7.0.9
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `clasifica_empresa`
 --
+CREATE DATABASE IF NOT EXISTS `clasifica_empresa` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `clasifica_empresa`;
 
 -- --------------------------------------------------------
 
@@ -30,18 +32,6 @@ CREATE TABLE `empresa` (
   `ID` int(6) UNSIGNED NOT NULL,
   `nombre_empresa` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `empresa`
---
-
-INSERT INTO `empresa` (`ID`, `nombre_empresa`) VALUES
-(1, 'coviran'),
-(2, 'alimentacion1'),
-(3, 'colada'),
-(4, 'Maneus'),
-(5, 'Google'),
-(6, 'HP');
 
 -- --------------------------------------------------------
 
@@ -81,14 +71,6 @@ CREATE TABLE `votante` (
   `email` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
---
--- Volcado de datos para la tabla `votante`
---
-
-INSERT INTO `votante` (`DNI`, `contraseña`, `nombre`, `apellidos`, `email`) VALUES
-(25344574, 'cr', 'Cristobal', 'Rodriguez Reina', 'cr13@corre.ugr.es'),
-(77135143, '1', 'Javier', 'carpito ', 'jaja@corre.ugr.es');
-
 -- --------------------------------------------------------
 
 --
@@ -101,21 +83,6 @@ CREATE TABLE `voto` (
   `DNIvotante` int(8) UNSIGNED NOT NULL,
   `Borrado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
---
--- Volcado de datos para la tabla `voto`
---
-
-INSERT INTO `voto` (`IDempresa`, `puntuacion`, `DNIvotante`, `Borrado`) VALUES
-(1, 4, 25344574, 1),
-(1, 6, 77135143, 1),
-(2, 1, 77135143, 1),
-(3, 2, 25344574, 0),
-(3, 7, 77135143, 1),
-(4, 7, 25344574, 1),
-(4, 8, 77135143, 1),
-(5, 2, 25344574, 1),
-(6, 6, 25344574, 1);
 
 -- --------------------------------------------------------
 
@@ -166,7 +133,7 @@ ALTER TABLE `voto`
 -- AUTO_INCREMENT de la tabla `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `ID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- Restricciones para tablas volcadas
 --
