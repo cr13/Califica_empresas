@@ -5,6 +5,7 @@ node_js:
   - "4.6.1"
   - "6.9.0"
 
+sudo: required
 before_install:
   - mysql -u root < clasifica_empresa.sql
   - npm install
