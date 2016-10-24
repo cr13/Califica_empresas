@@ -1,0 +1,12 @@
+language: node_js
+
+node_js:
+  - "0.12.17"
+  - "4.6.1"
+  - "6.9.0"
+
+before_install:
+  - mysql -u root < clasifica_empresa.sql
+  - npm install
+  - npm install -g mocha
+install: mocha test/test.js
