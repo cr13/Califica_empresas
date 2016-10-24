@@ -7,7 +7,7 @@ function BD(){
   var conexion = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'cr',
+    //password: 'cr',
     port: 3306,
     database: 'clasifica_empresa'
   });
